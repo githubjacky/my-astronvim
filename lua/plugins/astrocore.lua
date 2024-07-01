@@ -1,10 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
--- Configuration documentation can be found with `:h astrocore`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
-
 ---@type LazySpec
 return {
   "AstroNvim/astrocore",
@@ -27,11 +20,12 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
-        relativenumber = true, -- sets vim.opt.relativenumber
+        relativenumber = false, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
-        spell = false, -- sets vim.opt.spell
+        spell = true, -- sets vim.opt.spell
         signcolumn = "yes", -- sets vim.opt.signcolumn to yes
         wrap = false, -- sets vim.opt.wrap
+        colorcolumn = "90",
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -50,6 +44,18 @@ return {
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
+        -- NOTE: customized key mappings
+        ["<Tab>"] = { "$", desc = "move to the end of the current line" },
+        ["<S-Tab>"] = { "^", desc = "move to the end of the current line" },
+        [">"] = { "a<C-t><Esc>", desc = "make indent" },
+        ["<"] = { "a<C-d><Esc>", desc = "make indent" },
+        ["<S-h>"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "next buffer" },
+        ["<S-l>"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "previous buffer" },
+        ["<C-S-Up>"] = { "<Cmd>resize -2<CR>", desc = "Resize split up" },
+        ["<C-S-Down>"] = { "<Cmd>resize +2<CR>", desc = "Resize split down" },
+        ["<C-S-Left>"] = { "<Cmd>vertical resize -2<CR>", desc = "Resize split left" },
+        ["<C-S-Right>"] = { "<Cmd>vertical resize +2<CR>", desc = "Resize split right" },
+
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
           function()
@@ -66,6 +72,27 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+      },
+      x = {
+        ["<Tab>"] = { "$", desc = "move to the end of the current line" },
+        ["<S-Tab>"] = { "^", desc = "move to the end of the current line" },
+        [">"] = { ">gv", desc = "make indent" },
+        ["<"] = { "<gv", desc = "make indent" },
+      },
+    },
+    autocmds = {
+      auto_colorcolumn = {
+        {
+          event = "User",
+          pattern = "AstroBufsUpdated",
+          desc = "Highlight the colorcolumn",
+          group = "autocolorcolumn",
+          callback = function()
+            vim.cmd [[
+            highlight ColorColumn guibg=#414868
+          ]]
+          end,
+        },
       },
     },
   },
