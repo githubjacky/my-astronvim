@@ -7,7 +7,6 @@ return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.cpp" },
-  { import = "astrocommunity.pack.python-ruff" },
   { import = "astrocommunity.color.transparent-nvim" },
   -- import/override with your plugins folder
 }

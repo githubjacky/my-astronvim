@@ -38,16 +38,16 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      pyright = {
-        settings = {
-          python = {
-            analysis = {
-              -- Ignore all files for analysis to exclusively use Ruff for linting
-              ignore = { "*" },
-            },
-          },
-        },
-      },
+      -- pyright = {
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         -- Ignore all files for analysis to exclusively use Ruff for linting
+      --         ignore = { "*" },
+      --       },
+      --     },
+      --   },
+      -- },
       clangd = { capabilities = { offsetEncoding = "utf-8" } },
     },
     -- customize how language servers are attached
