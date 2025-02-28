@@ -9,7 +9,7 @@ return {
     opts = {
       ensure_installed = {
         "lua_ls",
-        "basedpyright",
+        "pyright",
       },
     },
   },
@@ -20,7 +20,6 @@ return {
     opts = {
       ensure_installed = {
         "stylua",
-        "yapf",
       },
     },
   },
